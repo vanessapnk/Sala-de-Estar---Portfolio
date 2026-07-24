@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/popups.css">
+</head>
+<body class="day-mode">
+
+  <button id="theme-toggle" class="theme-toggle" aria-label="Alternar modo dia/noite">
+    <img id="theme-icon" src="images/Assets/Sky Switch - Light.svg" alt="Sky Switch">
+  </button>
+
+  <!-- Pop-ups -->
+  <img id="me"        class="scene-popup" src="images/Assets/Me day.svg" alt="Me">
+  <img id="box-vinyl" class="scene-popup" src="images/Assets/Box vinyl day.svg" alt="Caixa de vinis">
+  <img id="phone"     class="scene-popup" src="images/Assets/Phone day.svg" alt="Telefone">
+  <img id="laptop"    class="scene-popup" src="images/Assets/laptop day.svg" alt="Laptop">
+
+  <!-- Gerativos -->
+  <img id="cat"          class="scene-generative" src="images/Assets/Cat day.svg" alt="Gato">
+  <img id="vinyl-player" class="scene-generative" src="images/Assets/Vinyl player day.svg" alt="Gira-discos">
+
+  <!-- Estáticos -->
+  <img id="lp" class="scene-static" src="images/Assets/LP day.svg" alt="Vinyl">
+
+  <!-- Pop-up Skills -->
+  <div id="popup-skills" class="popup-overlay">
+    <div class="popup-box">
+      <button class="popup-close" onclick="closePopup('popup-skills')">✕</button>
+      <img id="popup-skills-img" src="images/popups/skills day.svg" alt="Skills">
+    </div>
+  </div>
+
+  <!-- Pop-up Contacts -->
+  <div id="popup-contacts" class="popup-overlay">
+    <div class="popup-box">
+      <button class="popup-close" onclick="closePopup('popup-contacts')">✕</button>
+      <img src="images/popups/contacts.svg" alt="Contacts">
+    </div>
+  </div>
+
+  <!-- Pop-up About Me -->
+  <div id="popup-about" class="popup-overlay">
+    <div class="popup-box">
+      <button class="popup-close" onclick="closePopup('popup-about')">✕</button>
+      <img src="images/popups/about me.svg" alt="About Me">
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/popups.js"></script>
+</body>
+</html>

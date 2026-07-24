@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.day-mode {
+  background-image: url("../images/Day.webp?v=2");
+}
+
+body.night-mode {
+  background-image: url("../images/Night.webp?v=2");
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 40px;
+  right: 60px;
+  width: 114px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.theme-toggle img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Base para todos os elementos da cena */
+.scene-popup,
+.scene-generative,
+.scene-static {
+  position: fixed;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Elementos interativos que abrem pop-ups: me, laptop, telephone, vinyl box */
+.scene-popup {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  transform-origin: center center;
+}
+
+/* Elementos gerativos: cat, vinyl player */
+.scene-generative {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+/* Elementos estáticos sem interação */
+.scene-static {
+  pointer-events: none;
+}
+
+/* Hover — popup: escala + glow */
+body.day-mode .scene-popup:hover {
+  transform: translateZ(0) scale(1.02);
+  filter: drop-shadow(0 0 10px rgba(255, 220, 150, 0.7)) drop-shadow(0 0 22px rgba(255, 180, 80, 0.4));
+}
+
+body.night-mode .scene-popup:hover {
+  transform: translateZ(0) scale(1.03);
+  filter: drop-shadow(0 0 12px rgba(180, 200, 255, 0.7)) drop-shadow(0 0 28px rgba(150, 170, 255, 0.4));
+}
+
+/* Hover — generativo: só glow, sem escala */
+body.day-mode .scene-generative:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 220, 150, 0.7)) drop-shadow(0 0 22px rgba(255, 180, 80, 0.4));
+}
+
+body.night-mode .scene-generative:hover {
+  filter: drop-shadow(0 0 12px rgba(180, 200, 255, 0.7)) drop-shadow(0 0 28px rgba(150, 170, 255, 0.4));
+}
+
+/* Laptop escala mais no hover */
+body.day-mode #laptop:hover {
+  transform: translateZ(0) scale(1.06);
+}
+
+body.night-mode #laptop:hover {
+  transform: translateZ(0) scale(1.06);
+}
+
+/* LP flutuante */
+@keyframes lp-float {
+  0%, 100% { transform: translateZ(0) translateY(0px); }
+  50%       { transform: translateZ(0) translateY(-7px); }
+}
+
+#lp {
+  animation: lp-float 1.4s ease-in-out infinite;
+}
