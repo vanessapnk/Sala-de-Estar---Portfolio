@@ -27,23 +27,22 @@
 
 /* ── Animação da caixa ── */
 @keyframes popup-in {
-  from {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .popup-overlay.active .popup-box {
   animation: popup-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* ── Caixa do pop-up ── */
+/* ── Caixa base ── */
 .popup-box {
   position: relative;
+}
+
+/* ── Skills ── */
+#popup-skills .popup-box {
+  overflow: hidden;
 }
 
 #popup-skills .popup-box img {
@@ -52,14 +51,12 @@
   height: auto;
 }
 
-#popup-contacts .popup-box img {
-  display: block;
-  max-width: 80vw;
-  max-height: 80vh;
-  width: 80vw;
-  height: auto;
+#popup-skills .popup-close-btn {
+  top: 8%;
+  right: 15%;
 }
 
+/* ── About ── */
 #popup-about .popup-box img {
   display: block;
   max-width: 88vw;
@@ -68,14 +65,422 @@
   height: auto;
 }
 
-/* ── Botão fechar ── */
-.popup-close {
+/* ── Botão fechar genérico ── */
+.popup-close-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  border: none;
+  top: 5%;
+  right: 4%;
   background: none;
+  border: none;
   cursor: pointer;
-  font-size: 20px;
-  line-height: 1;
+  width: clamp(14px, 2vw, 18px);
+  padding: 0;
+  z-index: 10;
+  transition: opacity 0.2s;
+}
+
+.popup-close-btn svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.popup-close-btn:hover {
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════
+   Agenda (contacts)
+   SVG base: 911 × 895
+   Tudo escala com cqw (container query units)
+   Base de referência: 700px → 1cqw = 7px
+══════════════════════════════ */
+.agenda-popup {
+  container-type: inline-size;
+  position: relative;
+  width: min(700px, 86vw, 89.6vh);
+  max-height: 88vh;
+}
+
+.agenda-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.agenda-overlay {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 17%; right: 16%;
+  padding: 9% 2% 4% 4%;
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Fechar — posição específica para agenda */
+.agenda-popup .popup-close-btn {
+  right: 16%;
+}
+
+/* Título */
+.agenda-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: max(14px, 5.57cqw);
+  color: var(--color-pink);
+  margin: 0;
+}
+
+/* Sticky note */
+.sticky-note {
+  position: relative;
+  width: 67%;
+}
+
+.sticky-note-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sticky-note-links {
+  position: absolute;
+  inset: 15% 6% 18% 6%;
+  display: flex;
+  flex-direction: column;
+  gap: max(4px, 4.29cqw);
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sticky-note-links a {
+  display: flex;
+  align-items: center;
+  gap: max(4px, 1.14cqw);
+  color: #EDE2F0;
+  text-decoration: none;
+  font-size: max(9px, 2.29cqw);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+.sticky-note-links a:hover { opacity: 0.8; }
+.sticky-note-links a img {
+  width: max(10px, 2.57cqw);
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* Formulário */
+.agenda-form-label {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: max(11px, 2.86cqw);
+  color: var(--color-lime);
+  margin: 0;
+  margin-top: 4%;
+}
+
+.agenda-form {
+  display: flex;
+  flex-direction: column;
+  gap: max(4px, 1.14cqw);
+  flex: 1;
+}
+
+.agenda-form-row {
+  display: flex;
+  gap: max(4px, 1.14cqw);
+}
+
+.agenda-form-row .agenda-field:first-child { flex: 0 0 36%; }
+.agenda-form-row .agenda-field:last-child  { flex: 1; }
+
+.agenda-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.agenda-field label {
+  font-size: max(9px, 2.29cqw);
+  font-weight: 400;
+  color: #0F203E;
+}
+
+.agenda-field input,
+.agenda-field textarea {
+  background: #EDE2F0;
+  border: 2px solid #927AD7;
+  border-radius: 8px;
+  padding: max(2px, 0.71cqw) max(6px, 1.43cqw);
+  font-size: max(8px, 1.86cqw);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  color: #0F203E;
+  outline: none;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.agenda-field input:focus,
+.agenda-field textarea:focus { border-color: #6268CD; }
+
+.agenda-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: max(5px, 1.43cqw);
+}
+
+.agenda-submit {
+  background: #927AD7;
+  color: #EDE2F0;
+  border: 2px solid #927AD7;
+  border-radius: 8px;
+  padding: max(2px, 0.71cqw) max(10px, 2.29cqw);
+  font-size: max(8px, 1.86cqw);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+}
+.agenda-submit:hover { background: #6268CD; border-color: #6268CD; }
+
+/* ══════════════════════════════
+   Breakpoints landscape — apenas ajuste de dimensão do popup
+   (fontes já escalam via cqw automaticamente)
+══════════════════════════════ */
+
+/* Mobile landscape — 360px de altura */
+@media (orientation: landscape) and (max-height: 420px) {
+  .agenda-popup {
+    width: min(97.7vh, 90vw);
+    max-height: 96vh;
+  }
+  .agenda-field textarea { height: 5vh; }
+}
+
+/* Mobile landscape — 320px de altura */
+@media (orientation: landscape) and (max-height: 360px) {
+  .agenda-popup {
+    width: min(95.7vh, 90vw);
+    max-height: 94vh;
+  }
+  .agenda-field textarea { height: 4vh; }
+}
+
+/* ══════════════════════════════
+   Vinyl Player popup
+   SVG base: 1200 × 800 (3:2 landscape)
+   Posições em % do container
+══════════════════════════════ */
+.vinyl-popup {
+  container-type: inline-size;
+  position: relative;
+  width: min(900px, 90vw, 130vh);
+
+  --vp-btn-outer: #161838;
+  --vp-btn-inner: #0C0E28;
+  --vp-btn-icon: #6268CD;
+  --vp-accent: #C4CC23;
+  --vp-vol-track: #0C0E28;
+  --vp-vol-border: #6268CD;
+  --vp-text: #EDE2F0;
+}
+
+.day-mode .vinyl-popup {
+  --vp-btn-outer: #252338;
+  --vp-btn-inner: #1E1C30;
+  --vp-btn-icon: #CBC4F2;
+  --vp-vol-track: #1E1C30;
+  --vp-vol-border: #CBC4F2;
+  --vp-text: #1E1C30;
+}
+
+.vinyl-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Spinning disc overlay */
+.vinyl-disc-wrap {
+  position: absolute;
+  left: 7.5%;
+  top: 7.5%;
+  width: 56.67%;
+  pointer-events: none;
+}
+
+.vinyl-disc {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  animation: vinyl-spin 2s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-disc.spinning {
+  animation-play-state: running;
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Tonearm overlay — sits above spinning disc */
+.vinyl-tonearm {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(58% 0%, 82% 0%, 82% 70%, 58% 70%);
+}
+
+.vinyl-disc-wrap {
+  z-index: 1;
+}
+
+/* Track name */
+.vinyl-track-name {
+  position: absolute;
+  bottom: 4%;
+  left: 7.5%;
+  width: 56.67%;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: max(10px, 1.8cqw);
+  font-weight: 700;
+  color: var(--vp-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vinyl-track-name.visible {
+  opacity: 1;
+}
+
+/* Control panel */
+.vinyl-controls {
+  position: absolute;
+  left: 86.67%;
+  top: 15%;
+  width: 10%;
+  height: 70%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4%;
+  padding: 3% 0 3%;
+}
+
+/* Buttons */
+.vinyl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40%;
+  aspect-ratio: 1;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.vinyl-btn:hover {
+  transform: scale(1.12);
+}
+
+.vinyl-btn:active {
+  transform: scale(0.95);
+}
+
+.vinyl-btn svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.vbtn-outer { fill: var(--vp-btn-outer); }
+.vbtn-inner { fill: var(--vp-btn-inner); }
+.vbtn-icon  { fill: var(--vp-btn-icon); }
+
+/* Speaker icon */
+.vinyl-speaker {
+  width: 14%;
+  margin-top: auto;
+  margin-bottom: 18%;
+}
+
+.vinyl-speaker svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Volume slider */
+.vinyl-volume {
+  position: relative;
+  width: 70%;
+  height: 30%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-vol-track {
+  position: relative;
+  width: max(6px, 1.2cqw);
+  height: 100%;
+  background: var(--vp-vol-track);
+  border: 1px solid var(--vp-vol-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.vinyl-vol-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: var(--vp-accent);
+  border-radius: 999px;
+  transition: height 0.05s;
+}
+
+.vinyl-vol-thumb {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  background: var(--vp-accent);
+  border-radius: max(3px, 0.6cqw);
+  bottom: calc(80% - max(4px, 0.5cqw));
+  left: 0;
+  transition: bottom 0.05s;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+
+@media (orientation: landscape) and (max-height: 420px) {
+  .vinyl-popup {
+    width: min(130vh, 90vw);
+  }
 }

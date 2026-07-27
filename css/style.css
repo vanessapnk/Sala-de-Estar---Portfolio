@@ -1,3 +1,18 @@
+:root {
+  /* Primárias */
+  --color-navy:           #0F203E;
+  --color-purple:         #6268CD;
+  --color-lavender:       #927AD7;
+  --color-lavender-light: #EDE2F0;
+
+  /* Secundárias */
+  --color-green:          #4E7A35;
+  --color-lime:           #BACC2A;
+  --color-yellow:         #FAD85C;
+  --color-red:            #E8403A;
+  --color-pink:           #CC5E96;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,6 +45,8 @@ body.night-mode {
   padding: 0;
   cursor: pointer;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .theme-toggle img {
@@ -45,13 +62,14 @@ body.night-mode {
   position: fixed;
   will-change: transform;
   transform: translateZ(0);
+  opacity: 0;
 }
 
 /* Elementos interativos que abrem pop-ups: me, laptop, telephone, vinyl box */
 .scene-popup {
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.4s ease;
   transform-origin: center center;
 }
 
@@ -59,13 +77,15 @@ body.night-mode {
 .scene-generative {
   pointer-events: auto;
   cursor: pointer;
-  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, opacity 0.4s ease;
 }
 
 /* Elementos estáticos sem interação */
 .scene-static {
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
+
 
 /* Hover — popup: escala + glow */
 body.day-mode .scene-popup:hover {
@@ -78,6 +98,32 @@ body.night-mode .scene-popup:hover {
   filter: drop-shadow(0 0 12px rgba(180, 200, 255, 0.7)) drop-shadow(0 0 28px rgba(150, 170, 255, 0.4));
 }
 
+/* Cat hover crossfade */
+.cat-container {
+  overflow: visible;
+}
+
+.cat-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#cat-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cat-container:hover #cat-hover {
+  opacity: 1;
+}
+
+.cat-container.cat-blink #cat-hover {
+  opacity: 0;
+}
+
 /* Hover — generativo: só glow, sem escala */
 body.day-mode .scene-generative:hover {
   filter: drop-shadow(0 0 10px rgba(255, 220, 150, 0.7)) drop-shadow(0 0 22px rgba(255, 180, 80, 0.4));
@@ -85,6 +131,40 @@ body.day-mode .scene-generative:hover {
 
 body.night-mode .scene-generative:hover {
   filter: drop-shadow(0 0 12px rgba(180, 200, 255, 0.7)) drop-shadow(0 0 28px rgba(150, 170, 255, 0.4));
+}
+
+/* Vinyl player tooltip */
+.vinyl-player-wrap {
+  overflow: visible;
+}
+
+.vinyl-player-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+.vinyl-tooltip {
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-navy);
+  color: var(--color-lavender-light);
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.vinyl-player-wrap.show-tooltip:hover .vinyl-tooltip {
+  opacity: 1;
 }
 
 /* Laptop escala mais no hover */
@@ -98,10 +178,52 @@ body.night-mode #laptop:hover {
 
 /* LP flutuante */
 @keyframes lp-float {
-  0%, 100% { transform: translateZ(0) translateY(0px); }
-  50%       { transform: translateZ(0) translateY(-7px); }
+  0%, 100% {
+    transform: translateZ(0) translateY(0px);
+    filter: drop-shadow(0px 4px 3px rgba(0,0,0,0.35));
+  }
+  50% {
+    transform: translateZ(0) translateY(-4px);
+    filter: drop-shadow(0px 8px 8px rgba(0,0,0,0.7));
+  }
 }
 
 #lp {
+  transition: transform 0.8s ease-out, filter 0.8s ease-out;
+}
+
+#lp.floating {
   animation: lp-float 1.4s ease-in-out infinite;
+  transition: none;
+}
+
+/* Telefone a vibrar */
+@keyframes phone-ring {
+  0%, 100% { transform: translateZ(0) rotate(0deg); }
+  25%       { transform: translateZ(0) rotate(-4deg); }
+  75%       { transform: translateZ(0) rotate(4deg); }
+}
+
+#phone.ringing {
+  animation: phone-ring 0.2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Glow hint — chama atenção para os elementos interativos */
+@keyframes glow-pulse-day {
+  0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+  50%       { filter: drop-shadow(0 0 7px rgba(255, 220, 150, 0.55)) drop-shadow(0 0 16px rgba(255, 180, 80, 0.3)); }
+}
+
+@keyframes glow-pulse-night {
+  0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+  50%       { filter: drop-shadow(0 0 7px rgba(180, 200, 255, 0.55)) drop-shadow(0 0 16px rgba(150, 170, 255, 0.3)); }
+}
+
+body.day-mode .glow-hint {
+  animation: glow-pulse-day 1.2s ease-in-out 2;
+}
+
+body.night-mode .glow-hint {
+  animation: glow-pulse-night 1.2s ease-in-out 2;
 }
