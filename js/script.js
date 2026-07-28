@@ -95,6 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
     vinylPopupBg.src = isNight ? "images/popups/vinyl-player-top-night.svg" : "images/popups/vinyl-player-top-day.svg";
     vinylDisc.src = isNight ? "images/Assets/vinyl-night.svg" : "images/Assets/vinyl-day.svg";
     vinylTonearm.src = isNight ? "images/popups/vinyl-player-top-night.svg" : "images/popups/vinyl-player-top-day.svg";
+    const mode = isNight ? "night" : "day";
+    document.getElementById("vinyl-prev-icon").src = "images/icons/Previous-" + mode + ".svg";
+    document.getElementById("vinyl-play-icon").src = "images/icons/Play-" + mode + ".svg";
+    document.getElementById("vinyl-pause-icon").src = "images/icons/Pause-" + mode + ".svg";
+    document.getElementById("vinyl-skip-icon").src = "images/icons/Skip-" + mode + ".svg";
+    document.getElementById("vinyl-speaker-icon").src = "images/icons/speaker-" + mode + ".svg";
   }
 
   const hour = new Date().getHours();
@@ -102,6 +108,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   laptop.addEventListener("click", () => openPopup("popup-skills"));
   me.addEventListener("click", () => openPopup("popup-about"));
+
+  // --- Dock magnification effect on skill icons ---
+  const skillsIcons = document.querySelector(".skills-icons");
+  if (skillsIcons) {
+    const MAX_SCALE = 1.5;
+    const RADIUS = 80;
+
+    skillsIcons.addEventListener("mousemove", (e) => {
+      const icons = skillsIcons.querySelectorAll("img");
+      icons.forEach((icon) => {
+        const rect = icon.getBoundingClientRect();
+        const iconCenterX = rect.left + rect.width / 2;
+        const iconCenterY = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - iconCenterX, e.clientY - iconCenterY);
+        const scale = dist < RADIUS
+          ? MAX_SCALE - (MAX_SCALE - 1) * (dist / RADIUS)
+          : 1;
+        icon.style.transform = "scale(" + scale + ")";
+      });
+    });
+
+    skillsIcons.addEventListener("mouseleave", () => {
+      skillsIcons.querySelectorAll("img").forEach((icon) => {
+        icon.style.transform = "scale(1)";
+      });
+    });
+  }
 
   // --- Telefone: toca após inatividade ---
   const phoneRing = new Audio("sounds/phone ringing.mp3");
