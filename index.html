@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfólio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="images/icons/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/popups.css">
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/popups.js" defer></script>
+  <script src="js/form.js" defer></script>
 </head>
+
 <body class="day-mode">
 
   <button id="theme-toggle" class="theme-toggle" aria-label="Alternar modo dia/noite">
@@ -18,15 +27,15 @@
   </button>
 
   <!-- Pop-ups -->
-  <img id="me"        class="scene-popup" src="images/Assets/Me day.svg" alt="Me">
+  <img id="me" class="scene-popup" src="images/Assets/Me day.svg" alt="Me">
   <img id="box-vinyl" class="scene-popup" src="images/Assets/Box vinyl day.svg" alt="Caixa de vinis">
-  <img id="phone"     class="scene-popup" src="images/Assets/Phone day.svg" alt="Telefone">
-  <img id="laptop"    class="scene-popup" src="images/Assets/laptop day.svg" alt="Laptop">
+  <img id="phone" class="scene-popup" src="images/Assets/Phone day.svg" alt="Telefone">
+  <img id="laptop" class="scene-popup" src="images/Assets/laptop day.svg" alt="Laptop">
 
   <!-- Gerativos -->
   <div id="cat" class="scene-generative cat-container">
     <img id="cat-normal" src="images/Assets/Cat day.svg" alt="Gato">
-    <img id="cat-hover"  src="images/Assets/Cat night eyes closed.svg" alt="" aria-hidden="true">
+    <img id="cat-hover" src="images/Assets/Cat night eyes closed.svg" alt="" aria-hidden="true">
   </div>
   <div id="vinyl-player-wrap" class="scene-generative vinyl-player-wrap">
     <img id="vinyl-player" src="images/Assets/Vinyl player day.svg" alt="Gira-discos">
@@ -75,31 +84,34 @@
         <img src="images/icons/close.svg" alt="Fechar">
       </button>
       <div class="agenda-overlay">
-        <h2 class="popup-title agenda-title">Meus contactos</h2>
+        <h2 class="popup-title agenda-title">CONTACTOS</h2>
         <div class="sticky-note">
           <img class="sticky-note-bg" src="images/Assets/StickyNote.svg" alt="">
           <div class="sticky-note-links">
             <a href="tel:+351938427903"><img src="images/icons/phone.svg" alt="Telefone">+ 351 938427903</a>
-            <a href="mailto:vanessacarosilva@gmail.com"><img src="images/icons/email.svg" alt="Email">vanessacarosilva@gmail.com</a>
-            <a href="https://linkedin.com/in/vanessamgsilva" target="_blank"><img src="images/icons/linkedin.svg" alt="LinkedIn">in/vanessamgsilva</a>
-            <a href="https://github.com/vanessapnk" target="_blank"><img src="images/icons/github.svg" alt="GitHub">vanessapnk</a>
+            <a href="mailto:vanessacarosilva@gmail.com"><img src="images/icons/email.svg"
+                alt="Email">vanessacarosilva@gmail.com</a>
+            <a href="https://linkedin.com/in/vanessamgsilva" target="_blank"><img src="images/icons/linkedin.svg"
+                alt="LinkedIn">in/vanessamgsilva</a>
+            <a href="https://github.com/vanessapnk" target="_blank"><img src="images/icons/github.svg"
+                alt="GitHub">vanessapnk</a>
           </div>
         </div>
         <p class="agenda-form-label">Vamos conversar?</p>
-        <form class="agenda-form" onsubmit="return false;">
+        <form id="contactForm" class="agenda-form" onsubmit="return false;">
           <div class="agenda-form-row">
             <div class="agenda-field">
-              <label>Nome*</label>
-              <input type="text" required>
+              <label for="name">Nome*</label>
+              <input type="text" name="name" required>
             </div>
             <div class="agenda-field">
-              <label>Email*</label>
-              <input type="email" required>
+              <label for="email">Email*</label>
+              <input type="email" name="email" required>
             </div>
           </div>
           <div class="agenda-field">
-            <label>Mensagem*</label>
-            <textarea rows="3" required></textarea>
+            <label for="message">Mensagem*</label>
+            <textarea rows="3" name="message"></textarea>
             <div class="agenda-form-footer">
               <button type="submit" class="popup-action-btn agenda-submit">SUBMETER</button>
             </div>
@@ -144,7 +156,8 @@
         <!-- Play / Pause -->
         <button class="vinyl-btn" id="vinyl-play" aria-label="Play / Pause">
           <img id="vinyl-play-icon" class="icon-play" src="images/icons/Play-night.svg" alt="Play">
-          <img id="vinyl-pause-icon" class="icon-pause" src="images/icons/Pause-night.svg" alt="Pause" style="display:none">
+          <img id="vinyl-pause-icon" class="icon-pause" src="images/icons/Pause-night.svg" alt="Pause"
+            style="display:none">
         </button>
 
         <!-- Skip -->
@@ -168,7 +181,7 @@
     </div>
   </div>
 
-  <script src="js/script.js"></script>
-  <script src="js/popups.js"></script>
+
 </body>
+
 </html>
