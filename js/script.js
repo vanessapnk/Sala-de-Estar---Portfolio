@@ -523,6 +523,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Close projects popup when clicking outside carousel/vinyl
+  var projectsPopup = document.querySelector(".projects-popup");
+  if (projectsPopup) {
+    projectsPopup.addEventListener("click", function(e) {
+      if (e.target === projectsPopup || e.target === carouselContainer) {
+        if (vinylOpenView.classList.contains("active")) {
+          vinylCloseOpen.click();
+        } else {
+          closePopup("popup-projects");
+        }
+      }
+    });
+  }
+
   // Drag navigation
   if (carouselContainer) {
     carouselContainer.addEventListener("mousedown", (e) => {
