@@ -121,6 +121,45 @@
     </div>
   </div>
 
+  <!-- Pop-up Projects Carousel -->
+  <div id="popup-projects" class="popup-overlay">
+    <div class="popup-box projects-popup">
+      <button class="popup-close-btn projects-close-carousel" onclick="closePopup('popup-projects')" aria-label="Fechar">
+        <img src="images/icons/close.svg" alt="Fechar">
+      </button>
+
+      <div class="carousel-container">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-item" data-index="0" data-color="red">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=red.svg" alt="Projeto Red">
+          </div>
+          <div class="carousel-item" data-index="1" data-color="yellow">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=yellow.svg" alt="Projeto Yellow">
+          </div>
+          <div class="carousel-item" data-index="2" data-color="pink">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=pink.svg" alt="Projeto Pink">
+          </div>
+          <div class="carousel-item" data-index="3" data-color="purple">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=purple.svg" alt="Projeto Purple">
+          </div>
+          <div class="carousel-item" data-index="4" data-color="green">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=green.svg" alt="Projeto Green">
+          </div>
+          <div class="carousel-item" data-index="5" data-color="lime">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=lime.svg" alt="Projeto Lime">
+          </div>
+        </div>
+      </div>
+
+      <div class="vinyl-open-view" id="vinyl-open-view">
+        <button class="popup-close-btn vinyl-close-open" id="vinyl-close-open" aria-label="Fechar vinil">
+          <img src="images/icons/close.svg" alt="Fechar">
+        </button>
+        <img class="vinyl-open-img" id="vinyl-open-img" src="" alt="Projeto aberto">
+      </div>
+    </div>
+  </div>
+
   <!-- Pop-up About Me -->
   <div id="popup-about" class="popup-overlay">
     <div class="popup-box">

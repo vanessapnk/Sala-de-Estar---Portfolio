@@ -108,6 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   laptop.addEventListener("click", () => openPopup("popup-skills"));
   me.addEventListener("click", () => openPopup("popup-about"));
+  if (boxVinyl) boxVinyl.addEventListener("click", () => {
+    openPopup("popup-projects");
+    positionCarousel();
+  });
 
   // --- Dock magnification effect on skill icons ---
   const skillsIcons = document.querySelector(".skills-icons");
@@ -395,4 +399,170 @@ document.addEventListener("DOMContentLoaded", () => {
 
   glowInterval = setInterval(runGlow, GLOW_HINT_DELAY);
   glowClickables.forEach(el => el.addEventListener("click", stopGlow));
+
+  // --- Projects Carousel ---
+  const carouselItems = document.querySelectorAll(".carousel-item");
+  const carouselContainer = document.querySelector(".carousel-container");
+  const vinylOpenView = document.getElementById("vinyl-open-view");
+  const vinylOpenImg = document.getElementById("vinyl-open-img");
+  const vinylCloseOpen = document.getElementById("vinyl-close-open");
+  const totalItems = carouselItems.length;
+  let carouselIndex = 0;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragDelta = 0;
+
+  const colorToOpen = {
+    red: "images/popups/projects/State=open, Color=red.svg",
+    yellow: "images/popups/projects/State=open, Color=yellow.svg",
+    pink: "images/popups/projects/State=open, Color=pink.svg",
+    purple: "images/popups/projects/State=open, Color=purple.svg",
+    green: "images/popups/projects/State=open, Color=green.svg",
+    lime: "images/popups/projects/State=open, Color=lime.svg",
+  };
+
+  function positionCarousel() {
+    const spacing = Math.min(window.innerWidth * 0.22, 280);
+    carouselItems.forEach((item, i) => {
+      let offset = i - carouselIndex;
+      if (offset > totalItems / 2) offset -= totalItems;
+      if (offset < -totalItems / 2) offset += totalItems;
+
+      const absOffset = Math.abs(offset);
+      const translateX = offset * spacing;
+      const translateZ = -absOffset * 150;
+      const rotateY = -offset * 20;
+      const scale = 1 - absOffset * 0.1;
+      const zIndex = 10 - absOffset;
+      const hidden = absOffset > 2;
+
+      item.style.transform = "translate(-50%, -50%) translateX(" + (hidden ? 0 : translateX) + "px) translateZ(" + (hidden ? -500 : translateZ) + "px) rotateY(" + (hidden ? 0 : rotateY) + "deg) scale(" + (hidden ? 0.4 : Math.max(scale, 0.5)) + ")";
+      item.style.opacity = hidden ? "0" : "1";
+      item.style.zIndex = hidden ? 0 : zIndex;
+      item.classList.toggle("active", offset === 0);
+      item.classList.toggle("hidden-item", hidden);
+    });
+  }
+
+  function goToSlide(index) {
+    carouselIndex = ((index % totalItems) + totalItems) % totalItems;
+    positionCarousel();
+  }
+
+  carouselItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const idx = parseInt(item.dataset.index);
+      if (idx === carouselIndex) {
+        openVinyl(item);
+      } else {
+        goToSlide(idx);
+      }
+    });
+  });
+
+  function openVinyl(item) {
+    const color = item.dataset.color;
+    const img = item.querySelector("img");
+    const rect = img.getBoundingClientRect();
+
+    var back = document.createElement("img");
+    back.src = img.src;
+    back.className = "vinyl-flap-back";
+    back.style.left = rect.left + "px";
+    back.style.top = rect.top + "px";
+    back.style.width = rect.width + "px";
+    back.style.height = rect.height + "px";
+    document.body.appendChild(back);
+
+    var flap = document.createElement("img");
+    flap.src = img.src;
+    flap.className = "vinyl-flap";
+    flap.style.left = rect.left + "px";
+    flap.style.top = rect.top + "px";
+    flap.style.width = rect.width + "px";
+    flap.style.height = rect.height + "px";
+    document.body.appendChild(flap);
+
+    carouselItems.forEach(function(ci) {
+      ci.style.transition = "opacity 0.3s ease";
+      ci.style.opacity = "0";
+    });
+
+    vinylOpenImg.src = colorToOpen[color];
+
+    setTimeout(function() {
+      carouselContainer.style.display = "none";
+      document.querySelector(".projects-close-carousel").style.display = "none";
+
+      requestAnimationFrame(function() {
+        flap.classList.add("flap-open");
+      });
+    }, 300);
+
+    setTimeout(function() {
+      vinylOpenView.classList.add("active");
+      back.style.transition = "opacity 0.4s ease";
+      back.style.opacity = "0";
+    }, 850);
+
+    setTimeout(function() {
+      flap.remove();
+      back.remove();
+    }, 1400);
+  }
+
+  if (vinylCloseOpen) {
+    vinylCloseOpen.addEventListener("click", () => {
+      vinylOpenView.classList.remove("active");
+      setTimeout(() => {
+        carouselContainer.style.display = "";
+        document.querySelector(".projects-close-carousel").style.display = "";
+        carouselItems.forEach(ci => ci.style.transition = "");
+        positionCarousel();
+      }, 400);
+    });
+  }
+
+  // Drag navigation
+  if (carouselContainer) {
+    carouselContainer.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragDelta = 0;
+      carouselContainer.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      dragDelta = e.clientX - dragStartX;
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (!isDragging) return;
+      isDragging = false;
+      carouselContainer.style.cursor = "";
+      if (Math.abs(dragDelta) > 50) {
+        goToSlide(carouselIndex + (dragDelta < 0 ? 1 : -1));
+      }
+    });
+
+    carouselContainer.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragDelta = 0;
+    }, { passive: true });
+
+    document.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      dragDelta = e.touches[0].clientX - dragStartX;
+    }, { passive: true });
+
+    document.addEventListener("touchend", () => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (Math.abs(dragDelta) > 50) {
+        goToSlide(carouselIndex + (dragDelta < 0 ? 1 : -1));
+      }
+    });
+  }
 });
