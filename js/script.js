@@ -1,5 +1,5 @@
 const GLOW_HINT_DELAY  = 15000;
-const PHONE_IDLE_DELAY = 15000; // testar com 15s; produção: 3 * 60 * 1000
+const PHONE_IDLE_DELAY = 5 * 60 * 1000;
 
 document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function positionPhone() { positionObject(phone, 1404, 627, 129); }
-  function positionLaptop() { positionObject(laptop, 581.4, 544, 335); }
+  function positionLaptop() { positionObject(laptop, 561, 524, 385); }
   function positionVinylPlayer() { positionObject(vinylPlayerWrap, 1025, 135, 209); }
   function positionMe() { positionObject(me, 635, 195, 276); }
   function positionCat() { positionObject(cat, 205, 715, 249); }
@@ -171,9 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
     idleTimer = setTimeout(startPhoneRing, PHONE_IDLE_DELAY);
   };
 
-  // ["mousemove", "keydown", "scroll", "touchstart", "click"].forEach(ev => {
-  //   document.addEventListener(ev, resetIdleTimer, { passive: true });
-  // });
+  ["mousemove", "keydown", "scroll", "touchstart", "click"].forEach(ev => {
+    document.addEventListener(ev, resetIdleTimer, { passive: true });
+  });
+  resetIdleTimer();
 
   phone.addEventListener("click", () => {
     stopPhoneRing();
@@ -421,6 +422,26 @@ document.addEventListener("DOMContentLoaded", () => {
     lime: "images/popups/projects/State=open, Color=lime.svg",
   };
 
+  const colorToText = {
+    lime: {
+      title: "images/popups/projects/projects items/CARA FEIA/CARA FEIA-title.svg",
+      subtitle: "images/popups/projects/projects items/CARA FEIA/CARA FEIA-subtitle.svg"
+    },
+    yellow: {
+      title: "images/popups/projects/projects items/SALA DE ESTAR/SALA DE ESTAR-title.svg",
+      subtitle: "images/popups/projects/projects items/SALA DE ESTAR/SALA DE ESTAR-subtitle.svg"
+    },
+    purple: {
+      title: "images/popups/projects/projects items/aURRA/aURRA title.svg",
+      subtitle: "images/popups/projects/projects items/aURRA/aURRA subtitle.svg"
+    }
+  };
+
+  const vinylTextTitle = document.getElementById("vinyl-text-title");
+  const vinylTextSubtitle = document.getElementById("vinyl-text-subtitle");
+  const vinylDesc = document.getElementById("vinyl-desc");
+
+
   function positionCarousel() {
     const spacing = Math.min(window.innerWidth * 0.22, 280);
     carouselItems.forEach((item, i) => {
@@ -489,6 +510,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     vinylOpenImg.src = colorToOpen[color];
+
+    if (colorToText[color]) {
+      vinylTextTitle.src = colorToText[color].title;
+      vinylTextSubtitle.src = colorToText[color].subtitle;
+      vinylTextTitle.style.display = "block";
+      vinylTextSubtitle.style.display = "block";
+    } else {
+      vinylTextTitle.style.display = "none";
+      vinylTextSubtitle.style.display = "none";
+    }
+
+    var descTpl = document.getElementById("desc-" + color);
+    if (descTpl) {
+      vinylDesc.innerHTML = "";
+      vinylDesc.appendChild(descTpl.content.cloneNode(true));
+      vinylDesc.style.display = "block";
+      vinylDesc.scrollTop = 0;
+    } else {
+      vinylDesc.innerHTML = "";
+      vinylDesc.style.display = "none";
+    }
 
     setTimeout(function() {
       carouselContainer.style.display = "none";

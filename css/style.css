@@ -227,3 +227,15 @@ body.day-mode .glow-hint {
 body.night-mode .glow-hint {
   animation: glow-pulse-night 1.2s ease-in-out 2;
 }
+
+.site-footer {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(237, 226, 240, 0.6);
+  z-index: 5;
+  pointer-events: none;
+}

@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfólio</title>
+  <title>Sala de Estar - Vanessa Silva Portfólio- </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Lato:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Lato:wght@400;700&family=Reenie+Beanie&display=swap"
     rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="images/icons/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
@@ -53,7 +53,7 @@
         <img src="images/icons/close.svg" alt="Fechar">
       </button>
       <div class="skills-overlay">
-        <h2 class="popup-title skills-title">As minhas skills</h2>
+        <h2 class="popup-title skills-title">Ferramentas</h2>
         <div class="skills-icons">
           <img src="images/icons/skills/html.svg" alt="HTML">
           <img src="images/icons/skills/css.svg" alt="CSS">
@@ -69,7 +69,6 @@
           <img class="skills-cv-icon" src="images/icons/cv.svg" alt="CV">
           <a class="popup-action-btn skills-download-btn" href="documents/CV_VanessaSilva.pdf" download>
             DOWNLOAD CV
-            <img src="images/icons/download.svg" alt="">
           </a>
         </div>
       </div>
@@ -84,7 +83,7 @@
         <img src="images/icons/close.svg" alt="Fechar">
       </button>
       <div class="agenda-overlay">
-        <h2 class="popup-title agenda-title">CONTACTOS</h2>
+        <h2 class="popup-title agenda-title">Contactos</h2>
         <div class="sticky-note">
           <img class="sticky-note-bg" src="images/Assets/StickyNote.svg" alt="">
           <div class="sticky-note-links">
@@ -135,38 +134,62 @@
           </div>
           <div class="carousel-item" data-index="1" data-color="yellow">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=yellow.svg" alt="Projeto Yellow">
+            <span class="vinyl-closed-title">SALA DE ESTAR</span>
           </div>
           <div class="carousel-item" data-index="2" data-color="pink">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=pink.svg" alt="Projeto Pink">
           </div>
           <div class="carousel-item" data-index="3" data-color="purple">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=purple.svg" alt="Projeto Purple">
+            <span class="vinyl-closed-title">aURRA</span>
           </div>
           <div class="carousel-item" data-index="4" data-color="green">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=green.svg" alt="Projeto Green">
           </div>
           <div class="carousel-item" data-index="5" data-color="lime">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=lime.svg" alt="Projeto Lime">
+            <span class="vinyl-closed-title">CARA FEIA</span>
           </div>
         </div>
       </div>
 
       <div class="vinyl-open-view" id="vinyl-open-view">
-        <button class="popup-close-btn vinyl-close-open" id="vinyl-close-open" aria-label="Fechar vinil">
-          <img src="images/icons/close.svg" alt="Fechar">
-        </button>
-        <img class="vinyl-open-img" id="vinyl-open-img" src="" alt="Projeto aberto">
+        <div class="vinyl-open-wrap">
+          <button class="popup-close-btn vinyl-close-open" id="vinyl-close-open" aria-label="Fechar vinil">
+            <img src="images/icons/close.svg" alt="Fechar">
+          </button>
+          <img class="vinyl-open-img" id="vinyl-open-img" src="" alt="Projeto aberto">
+          <img class="vinyl-text vinyl-text-title" id="vinyl-text-title" src="" alt="">
+          <img class="vinyl-text vinyl-text-subtitle" id="vinyl-text-subtitle" src="" alt="">
+          <div class="vinyl-desc" id="vinyl-desc"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Pop-up About Me -->
   <div id="popup-about" class="popup-overlay">
-    <div class="popup-box">
+    <div class="popup-box about-popup">
       <button class="popup-close-btn" onclick="closePopup('popup-about')" aria-label="Fechar">
         <img src="images/icons/close.svg" alt="Fechar">
       </button>
-      <img src="images/popups/about me.svg" alt="About Me">
+      <img class="about-bg" src="images/popups/about me.svg" alt="About Me">
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="images/popups/myPhoto.png" alt="Vanessa Silva">
+      </div>
+      <span class="about-label about-label-uiux">UI/UX Designer</span>
+      <span class="about-label about-label-creativity">Creativity</span>
+      <span class="about-label about-label-problem">Problem solving</span>
+      <span class="about-label about-label-critical">Critical<br>thinking</span>
+      <span class="about-label about-label-frontend">Front-end<br>Developer</span>
+      <div class="about-text">
+        <p>Entra, fica à vontade!<br>
+        Sou a Vanessa, alguém que acredita que as melhores experiências digitais se sentem como um espaço onde queremos ficar.</p>
+        <p>Comecei por Engenharia Civil, mudei de rumo, passei pelo mundo do código num bootcamp de Fullstack, e fui percebendo que o que me move mesmo é a intersecção entre o analítico e o humano, criar coisas bonitas, apelativas, que funcionam, que fazem sentido, e que as pessoas conseguem usar sem esforço.</p>
+        <p>Hoje estou a aprofundar o meu caminho em UI/UX Design: interaction design, usabilidade e prototipagem. Trago comigo anos de experiência em atendimento ao cliente, logística e operações, o que me deu uma visão muito prática de como as pessoas realmente se comportam, e do que precisam.</p>
+        <p>Esta sala é minha. Os vinis são a minha playlist constante e a minha inspiração, o laptop a minha ferramenta de trabalho, e a Kira a minha fiel companhia... Explora à vontade e descobre o que cada canto tem para te contar.<br>
+        E se quiseres conversar... atende o telefone!</p>
+      </div>
     </div>
   </div>
 
@@ -220,6 +243,60 @@
     </div>
   </div>
 
+  <footer class="site-footer">Vanessa Silva — Sala de Estar Portfólio 2026</footer>
+
+  <!-- Descrições dos projetos -->
+  <template id="desc-yellow">
+    <p><strong>Sala de Estar — Portfólio Pessoal</strong></p>
+    <p>Um portfólio interativo que convida o visitante a explorar uma sala de estar virtual. Cada objeto conta uma história: os vinis revelam projetos, o laptop mostra ferramentas, e o telefone abre os contactos.</p>
+    <p>O conceito nasceu da ideia de criar um espaço digital que se sente como um lugar onde queremos ficar — acolhedor, pessoal e cheio de detalhes para descobrir.</p>
+    <p><strong>O Desafio</strong></p>
+    <p>Criar um portfólio que não fosse apenas uma galeria de trabalhos, mas uma experiência imersiva. O visitante deveria sentir curiosidade ao entrar — como quando entramos numa sala e queremos explorar cada canto. O desafio técnico foi combinar interações complexas com performance e responsividade.</p>
+    <p><strong>O Processo</strong></p>
+    <p>Começou com research de portfólios interativos e referências visuais. A ideia da sala de estar surgiu como metáfora perfeita: um espaço pessoal, acolhedor, onde cada objeto tem significado. O wireframing foi feito em Figma, iterando sobre a disposição dos elementos e as micro-interações.</p>
+    <p>A fase de desenvolvimento trouxe desafios técnicos interessantes: a animação de abertura dos vinis com efeito 3D, o sistema de carousel com drag gesture, o vinyl player funcional com playlist real, e o modo dia/noite com transição suave em todos os elementos.</p>
+    <p><strong>Papel:</strong> UI/UX Design, Front-end Development, Interaction Design</p>
+    <p><strong>Ferramentas:</strong> Figma, HTML, CSS, JavaScript, Illustrator</p>
+    <p><strong>Destaques Técnicos:</strong></p>
+    <p>• Design responsivo com 4 breakpoints optimizados<br>• Carousel de vinis com animação 3D de abertura<br>• Modo dia/noite com transição suave<br>• Vinyl player funcional com playlist integrada<br>• Efeito dock magnification nos ícones<br>• Formulário de contacto com validação<br>• Container queries para escalabilidade dos popups<br>• Animações CSS performantes com GPU acceleration</p>
+    <p><strong>Resultado</strong></p>
+    <p>Este projeto representa a intersecção entre o analítico e o criativo — cada interação foi pensada para surpreender sem comprometer a usabilidade. A sala de estar tornou-se mais do que um portfólio: é um convite para ficar, explorar, e descobrir.</p>
+    <p><em>Nota: As imagens de base foram geradas por inteligência artificial e posteriormente alteradas e manipuladas com Photoshop e Figma.</em></p>
+  </template>
+
+  <template id="desc-lime">
+    <p><strong>Cara Feia — Loja de Discos</strong></p>
+    <p>Identidade visual e web design para uma loja de discos independente. O nome irreverente pediu uma abordagem arrojada: tipografia expressiva, cores vibrantes e uma presença digital que transmite a mesma energia de entrar numa loja cheia de tesouros por descobrir.</p>
+    <p><strong>O Desafio</strong></p>
+    <p>Criar uma identidade que refletisse o espírito da loja — autêntica, sem filtros, com personalidade forte. O site tinha de funcionar como extensão do espaço físico: um lugar onde se descobre música, se explora sem pressa e se sente a cultura vinyl.</p>
+    <p><strong>O Processo</strong></p>
+    <p>A pesquisa começou pela cultura das lojas de discos independentes — a estética DIY, os cartazes feitos à mão, a tipografia crua. A identidade nasceu dessa linguagem: bold, direta, sem medo de ser diferente.</p>
+    <p>O web design seguiu a mesma filosofia: navegação intuitiva, catálogo visual com filtros por género e época, e uma experiência que convida a explorar. Cada secção do site foi pensada como uma prateleira da loja.</p>
+    <p><strong>Papel:</strong> UI/UX Design, Identidade Visual, Web Design</p>
+    <p><strong>Ferramentas:</strong> Figma, Illustrator, Photoshop</p>
+    <p><strong>Destaques:</strong></p>
+    <p>• Identidade visual completa — logo, tipografia, paleta de cores<br>• Design system com componentes reutilizáveis<br>• Catálogo interativo com filtros e pesquisa<br>• Design responsivo mobile-first<br>• Integração com redes sociais<br>• Páginas de produto com player de preview</p>
+    <p><strong>Resultado</strong></p>
+    <p>Uma marca com personalidade que se destaca no digital sem perder a autenticidade do vinyl. O site tornou-se o ponto de entrada para novos clientes e uma ferramenta de fidelização para os habituais.</p>
+    <p><a class="vinyl-desc-btn" href="documents/Manual de Identidade - Cara Feia.pdf" download>DOWNLOAD PROJETO</a></p>
+  </template>
+
+  <template id="desc-purple">
+    <p><strong>aURRA Sound Studio — Sonic Branding</strong></p>
+    <p>Website para um estúdio especializado em sonic branding — a arte de criar identidades sonoras para marcas. O desafio foi traduzir o som em experiência visual, criando um site que comunica através de todos os sentidos.</p>
+    <p><strong>O Desafio</strong></p>
+    <p>Como é que se mostra som num ecrã? O site precisava de transmitir a expertise do estúdio em sonic branding sem depender exclusivamente do áudio. A experiência visual tinha de evocar ritmo, vibração e a precisão técnica do trabalho sonoro.</p>
+    <p><strong>O Processo</strong></p>
+    <p>A research focou-se em sinestesia — a ligação entre sentidos. Estudámos como formas, cores e movimento podem evocar sensações sonoras. O resultado foi um design que pulsa: elementos visuais que sugerem ondas sonoras, transições rítmicas e uma paleta que vibra.</p>
+    <p>A arquitectura de informação foi desenhada como uma composição musical: introdução, desenvolvimento, clímax e resolução. Cada secção do site tem o seu próprio ritmo e intensidade.</p>
+    <p><strong>Papel:</strong> UI/UX Design, Web Design, Interaction Design</p>
+    <p><strong>Ferramentas:</strong> Figma, Illustrator, After Effects</p>
+    <p><strong>Destaques:</strong></p>
+    <p>• Design que traduz som em experiência visual<br>• Animações rítmicas sincronizadas<br>• Portfólio de casos com player de áudio integrado<br>• Visualizações de ondas sonoras interativas<br>• Design responsivo com animações adaptativas<br>• Secção de serviços com demonstrações interativas</p>
+    <p><strong>Resultado</strong></p>
+    <p>Um site que prova que o sonic branding vai além do som — é uma experiência multissensorial. O estúdio ganhou uma presença digital que reflecte a qualidade e inovação do seu trabalho.</p>
+    <p><a class="vinyl-desc-btn" href="https://github.com/vanessapnk/aURRA---Exercise-Bootstrap-responsive" target="_blank">VER NO GITHUB</a></p>
+  </template>
 
 </body>
 
