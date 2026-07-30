@@ -1,5 +1,5 @@
 const GLOW_HINT_DELAY  = 15000;
-const PHONE_IDLE_DELAY = 5 * 60 * 1000;
+const PHONE_IDLE_DELAY = 2 * 60 * 1000;
 
 document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");

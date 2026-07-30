@@ -315,6 +315,12 @@
   right: 16%;
 }
 
+/* Fechar — posição específica para vinyl player */
+.vinyl-popup .popup-close-btn {
+  top: 6%;
+  right: 4%;
+}
+
 /* Título */
 .agenda-title {
   color: var(--color-pink);
