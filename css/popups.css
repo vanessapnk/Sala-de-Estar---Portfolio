@@ -702,11 +702,13 @@ body:not(.day-mode) .projects-close-carousel:hover img {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: clamp(14px, 3.5vw, 42px);
+  font-size: max(14px, 3.5vw);
   color: #6268CD;
   text-align: center;
   pointer-events: none;
   line-height: 1;
+  transform: scale(var(--title-scale, 1));
+  transform-origin: center;
 }
 
 [data-color="purple"] .vinyl-closed-title {
