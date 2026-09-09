@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function positionPhone() { positionObject(phone, 1404, 627, 129); }
-  function positionLaptop() { positionObject(laptop, 561, 524, 385); }
+  function positionLaptop() { positionObject(laptop, 551, 524, 385); }
   function positionVinylPlayer() { positionObject(vinylPlayerWrap, 1025, 135, 209); }
   function positionMe() { positionObject(me, 635, 195, 276); }
   function positionCat() { positionObject(cat, 205, 715, 249); }
