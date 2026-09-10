@@ -167,6 +167,123 @@ body.night-mode .scene-generative:hover {
   opacity: 1;
 }
 
+/* "me" hover tooltip */
+#me-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.me-tooltip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, calc(-100% - 8px));
+  rotate: 10deg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: clamp(20px, 2.2vw, 32px);
+  color: var(--color-lavender-light);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#me-wrap:hover ~ .me-tooltip {
+  opacity: 1;
+}
+
+.laptop-tooltip {
+  transform: translate(-70%, calc(-100% - 8px));
+  rotate: 0deg;
+}
+
+#laptop:hover ~ .laptop-tooltip {
+  opacity: 1;
+}
+
+.boxvinyl-tooltip {
+  transform: translate(-50%, calc(-100% - 8px));
+  rotate: 0deg;
+}
+
+#box-vinyl:hover ~ .boxvinyl-tooltip {
+  opacity: 1;
+}
+
+.phone-tooltip {
+  transform: translate(-50%, calc(-100% - 8px));
+  rotate: 0deg;
+}
+
+#phone:hover ~ .phone-tooltip {
+  opacity: 1;
+}
+
+.vinylplayer-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 105%;
+  transform: translate(-50%, 0);
+  rotate: 0deg;
+}
+
+.vinylplayer-tooltip2 {
+  position: absolute;
+  left: 50%;
+  bottom: 105%;
+  transform: translate(-50%, 0);
+  rotate: 0deg;
+  white-space: normal;
+  max-width: 160px;
+  text-align: center;
+}
+
+.vinyl-player-wrap:hover .vinylplayer-tooltip,
+.vinyl-player-wrap:hover .vinylplayer-tooltip2 {
+  opacity: 1;
+}
+
+.me-tooltip-arrow {
+  display: block;
+  width: clamp(100px, 3vw, 500px);
+  height: auto;
+  color: var(--color-lavender-light);
+  rotate: -95deg;
+}
+
+/* Cada tooltip pode ter a sua própria rotação/tamanho de seta */
+.laptop-tooltip .me-tooltip-arrow {
+  rotate: 0deg;
+}
+
+.boxvinyl-tooltip .me-tooltip-arrow {
+  rotate: 0deg;
+}
+
+.phone-tooltip .me-tooltip-arrow {
+  rotate: 0deg;
+}
+
+.vinylplayer-tooltip .me-tooltip-arrow {
+  rotate: 0deg;
+}
+
+.vinylplayer-tooltip2 .me-tooltip-arrow {
+  rotate: 0deg;
+}
+
+.me-tooltip-arrow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Laptop escala mais no hover */
 body.day-mode #laptop:hover {
   transform: translateZ(0) scale(1.06);

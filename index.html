@@ -27,10 +27,28 @@
   </button>
 
   <!-- Pop-ups -->
-  <img id="me" class="scene-popup" src="images/Assets/Me day.svg" alt="Me">
+  <div id="me-wrap" class="scene-popup">
+    <img id="me" src="images/Assets/Me day.svg" alt="Me">
+  </div>
+  <div id="me-tooltip" class="me-tooltip">
+      Sobre mim
+      <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+  </div>
   <img id="box-vinyl" class="scene-popup" src="images/Assets/Box vinyl day.svg" alt="Caixa de vinis">
-  <!-- <img id="phone" class="scene-popup" src="images/Assets/Phone day.svg" alt="Telefone"> -->
+  <div id="box-vinyl-tooltip" class="me-tooltip boxvinyl-tooltip">
+    Projetos
+    <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+  </div>
+  <img id="phone" class="scene-popup" src="images/Assets/Phone day.svg" alt="Telefone">
+  <div id="phone-tooltip" class="me-tooltip phone-tooltip">
+    Contactos
+    <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+  </div>
   <img id="laptop" class="scene-popup" src="images/Assets/laptop day.svg" alt="Laptop">
+  <div id="laptop-tooltip" class="me-tooltip laptop-tooltip">
+    Ferramentas &amp; CV
+    <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+  </div>
 
   <!-- Gerativos -->
   <div id="cat" class="scene-generative cat-container">
@@ -39,7 +57,14 @@
   </div>
   <div id="vinyl-player-wrap" class="scene-generative vinyl-player-wrap">
     <img id="vinyl-player" src="images/Assets/Vinyl player day.svg" alt="Gira-discos">
-    <span class="vinyl-tooltip">Duplo clique para abrir o player</span>
+    <div class="me-tooltip vinylplayer-tooltip">
+      Play/Pause
+      <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+    </div>
+    <div class="me-tooltip vinylplayer-tooltip2">
+      Duplo clique para abrir o player
+      <span class="me-tooltip-arrow" data-svg="images/icons/arrow-doodle-laptop.svg"></span>
+    </div>
   </div>
 
   <!-- Estáticos -->
@@ -129,26 +154,35 @@
 
       <div class="carousel-container">
         <div class="carousel-track" id="carousel-track">
-          <div class="carousel-item" data-index="0" data-color="lime">
-            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=lime.svg" alt="Projeto Lime">
-          </div>
-          <div class="carousel-item" data-index="1" data-color="yellow">
+          <div class="carousel-item" data-index="0" data-color="yellow">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=yellow.svg" alt="Projeto Yellow">
-            <span class="vinyl-closed-title">SALA DE ESTAR</span>
+            <div class="vinyl-closed-text">
+              <span class="vinyl-closed-title">Sala de estar</span>
+              <span class="vinyl-closed-subtitle">Portfólio Pessoal — Interactive Design Showcase</span>
+            </div>
+          </div>
+          <div class="carousel-item" data-index="1" data-color="red">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=red.svg" alt="Projeto Red">
+            <div class="vinyl-closed-text">
+              <span class="vinyl-closed-title">cara feia</span>
+              <span class="vinyl-closed-subtitle">Identidade visual e Web design - Loja de discos</span>
+            </div>
           </div>
           <div class="carousel-item" data-index="2" data-color="pink">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=pink.svg" alt="Projeto Pink">
           </div>
-          <div class="carousel-item" data-index="3" data-color="purple">
-            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=purple.svg" alt="Projeto Purple">
-            <span class="vinyl-closed-title">aURRA</span>
-          </div>
-          <div class="carousel-item" data-index="4" data-color="green">
+          <div class="carousel-item" data-index="3" data-color="green">
             <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=green.svg" alt="Projeto Green">
           </div>
-          <div class="carousel-item" data-index="5" data-color="red">
-            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=red.svg" alt="Projeto Red">
-            <span class="vinyl-closed-title">CARA FEIA</span>
+          <div class="carousel-item" data-index="4" data-color="lime">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=lime.svg" alt="Projeto Lime">
+          </div>
+          <div class="carousel-item" data-index="5" data-color="purple">
+            <img class="vinyl-closed" src="images/popups/projects/State=closed, Color=purple.svg" alt="Projeto Purple">
+            <div class="vinyl-closed-text">
+              <span class="vinyl-closed-title">aURRA <span class="vinyl-title-special">Sound Studio</span></span>
+              <span class="vinyl-closed-subtitle">Website de Sonic Branding</span>
+            </div>
           </div>
         </div>
       </div>

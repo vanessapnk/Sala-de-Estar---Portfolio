@@ -2,17 +2,29 @@ const GLOW_HINT_DELAY  = 15000;
 const PHONE_IDLE_DELAY = 60 * 1000;
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Carrega SVGs externos referenciados via data-svg (mantém o HTML limpo)
+  document.querySelectorAll("[data-svg]").forEach((el) => {
+    fetch(el.dataset.svg)
+      .then((res) => res.text())
+      .then((svgText) => { el.innerHTML = svgText; });
+  });
+
   const themeToggle = document.getElementById("theme-toggle");
   const themeIcon = document.getElementById("theme-icon");
   const phone = document.getElementById("phone");
+  const phoneTooltip = document.getElementById("phone-tooltip");
   const laptop = document.getElementById("laptop");
+  const laptopTooltip = document.getElementById("laptop-tooltip");
   const vinylPlayerWrap = document.getElementById("vinyl-player-wrap");
   const vinylPlayer = document.getElementById("vinyl-player");
   const me = document.getElementById("me");
+  const meWrap = document.getElementById("me-wrap");
+  const meTooltip = document.getElementById("me-tooltip");
   const cat       = document.getElementById("cat");
   const catNormal = document.getElementById("cat-normal");
   const catHover  = document.getElementById("cat-hover");
   const boxVinyl = document.getElementById("box-vinyl");
+  const boxVinylTooltip = document.getElementById("box-vinyl-tooltip");
   const lp = document.getElementById("lp");
   const popupSkillsImg = document.getElementById("popup-skills-img");
   const vinylDisc     = document.getElementById("vinyl-disc");
@@ -52,12 +64,41 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggle.style.width = btnW + "px";
   }
 
-  function positionPhone() { positionObject(phone, 1404, 627, 129); }
-  function positionLaptop() { positionObject(laptop, 551, 524, 385); }
+  function positionPhone() {
+    positionObject(phone, 1404, 627, 129);
+    if (phoneTooltip) {
+      const rect = phone.getBoundingClientRect();
+      phoneTooltip.style.left = (rect.left + rect.width / 2) + "px";
+      phoneTooltip.style.top = rect.top + "px";
+    }
+  }
+  function positionLaptop() {
+    positionObject(laptop, 551, 524, 385);
+    if (laptopTooltip) {
+      const rect = laptop.getBoundingClientRect();
+      laptopTooltip.style.left = rect.left + "px";
+      laptopTooltip.style.top = rect.top + "px";
+    }
+  }
   function positionVinylPlayer() { positionObject(vinylPlayerWrap, 1025, 135, 209); }
-  function positionMe() { positionObject(me, 635, 195, 276); }
+  function positionMe() {
+    positionObject(meWrap, 635, 195, 276);
+    if (meTooltip) {
+      const rect = meWrap.getBoundingClientRect();
+      meTooltip.style.left = (rect.left + rect.width / 2) + "px";
+      meTooltip.style.top = rect.top + "px";
+    }
+  }
   function positionCat() { positionObject(cat, 205, 715, 249); }
-  function positionBoxVinyl() { if (boxVinyl) positionObject(boxVinyl, 972, 738, 479); }
+  function positionBoxVinyl() {
+    if (!boxVinyl) return;
+    positionObject(boxVinyl, 972, 738, 479);
+    if (boxVinylTooltip) {
+      const rect = boxVinyl.getBoundingClientRect();
+      boxVinylTooltip.style.left = (rect.left + rect.width / 2) + "px";
+      boxVinylTooltip.style.top = rect.top + "px";
+    }
+  }
   function positionLp() { positionObject(lp, 1056, 245, 108); }
 
   function positionAll() {
@@ -107,7 +148,24 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme(hour < 6 || hour >= 20);
 
   laptop.addEventListener("click", () => openPopup("popup-skills"));
-  me.addEventListener("click", () => openPopup("popup-about"));
+  meWrap.addEventListener("click", () => openPopup("popup-about"));
+
+  // Reinicia a animação SMIL da seta a cada hover (clonar reinicia o timeline)
+  function restartArrowOnHover(triggerEl, tooltipEl) {
+    if (!triggerEl || !tooltipEl) return;
+    triggerEl.addEventListener("mouseenter", () => {
+      tooltipEl.querySelectorAll(".me-tooltip-arrow svg").forEach((arrowSvg) => {
+        const clone = arrowSvg.cloneNode(true);
+        arrowSvg.replaceWith(clone);
+      });
+    });
+  }
+
+  restartArrowOnHover(meWrap, meTooltip);
+  restartArrowOnHover(laptop, laptopTooltip);
+  restartArrowOnHover(boxVinyl, boxVinylTooltip);
+  restartArrowOnHover(phone, phoneTooltip);
+  restartArrowOnHover(vinylPlayerWrap, vinylPlayerWrap);
   if (boxVinyl) boxVinyl.addEventListener("click", () => {
     openPopup("popup-projects");
     positionCarousel();
@@ -157,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!phoneRing.paused) return;
     phone.classList.add("ringing");
     phoneRing.currentTime = 0;
-    phoneRing.play().catch(() => {});
+    // phoneRing.play().catch(() => {});  // ← Som desativado
   };
 
   const stopPhoneRing = () => {
@@ -367,7 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const glowSequence = [
-    { el: me,       delay: 0    },
+    { el: meWrap,   delay: 0    },
     { el: laptop,   delay: 3000 },
     { el: boxVinyl, delay: 6000 },
     { el: phone,    delay: 9000 },
@@ -472,15 +530,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const absOffset = Math.abs(offset);
       const translateX = offset * spacing;
       const translateZ = -absOffset * 150;
-      const rotateY = -offset * 20;
       const scale = 1 - absOffset * 0.1;
       const zIndex = 10 - absOffset;
       const hidden = absOffset > 2;
 
       const finalScale = hidden ? 0.4 : Math.max(scale, 0.5);
-      item.style.transform = "translate(-50%, -50%) translateX(" + (hidden ? 0 : translateX) + "px) translateZ(" + (hidden ? -500 : translateZ) + "px) rotateY(" + (hidden ? 0 : rotateY) + "deg) scaleX(" + finalScale + ") scaleY(" + finalScale + ")";
+      const blur = absOffset === 0 ? 0 : absOffset === 1 ? 1.5 : 3;
+      item.style.transform = "translate(-50%, -50%) translateX(" + (hidden ? 0 : translateX) + "px) translateZ(" + (hidden ? -500 : translateZ) + "px) scaleX(" + finalScale + ") scaleY(" + finalScale + ")";
       item.style.opacity = hidden ? "0" : "1";
       item.style.zIndex = hidden ? 0 : zIndex;
+      item.style.filter = "blur(" + blur + "px)";
       item.classList.toggle("active", offset === 0);
       item.classList.toggle("hidden-item", hidden);
     });
