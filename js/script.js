@@ -423,23 +423,43 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const colorToText = {
-    lime: {
-      title: "images/popups/projects/projects items/CARA FEIA/CARA FEIA-title.svg",
-      subtitle: "images/popups/projects/projects items/CARA FEIA/CARA FEIA-subtitle.svg"
+    red: {
+      title: "images/popups/projects/projects items/CARA FEIA/title.svg",
+      subtitle: "images/popups/projects/projects items/CARA FEIA/subtitle.svg"
     },
     yellow: {
-      title: "images/popups/projects/projects items/SALA DE ESTAR/SALA DE ESTAR-title.svg",
-      subtitle: "images/popups/projects/projects items/SALA DE ESTAR/SALA DE ESTAR-subtitle.svg"
+      title: "images/popups/projects/projects items/SALA DE ESTAR/title.svg",
+      subtitle: "images/popups/projects/projects items/SALA DE ESTAR/subtitle.svg"
     },
     purple: {
-      title: "images/popups/projects/projects items/aURRA/aURRA title.svg",
-      subtitle: "images/popups/projects/projects items/aURRA/aURRA subtitle.svg"
+      title: "images/popups/projects/projects items/aURRA/title.svg",
+      subtitle: "images/popups/projects/projects items/aURRA/subtitle.svg"
     }
+  };
+
+  const colorToCover = {
+    red: "images/popups/projects/projects items/CARA FEIA/cover.png",
+    yellow: "images/popups/projects/projects items/SALA DE ESTAR/cover.png",
+    purple: "images/popups/projects/projects items/aURRA/cover.png",
+    green: "",
+    lime: ""
   };
 
   const vinylTextTitle = document.getElementById("vinyl-text-title");
   const vinylTextSubtitle = document.getElementById("vinyl-text-subtitle");
   const vinylDesc = document.getElementById("vinyl-desc");
+
+  // Substituir SVG closed pela cover se existir
+  carouselItems.forEach((item) => {
+    const color = item.dataset.color;
+    if (colorToCover[color] && colorToCover[color] !== "") {
+      const closedImg = item.querySelector(".vinyl-closed");
+      if (closedImg) {
+        closedImg.src = colorToCover[color];
+        closedImg.alt = color.charAt(0).toUpperCase() + color.slice(1) + " - Capa";
+      }
+    }
+  });
 
 
   function positionCarousel() {
@@ -457,7 +477,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const zIndex = 10 - absOffset;
       const hidden = absOffset > 2;
 
-      item.style.transform = "translate(-50%, -50%) translateX(" + (hidden ? 0 : translateX) + "px) translateZ(" + (hidden ? -500 : translateZ) + "px) rotateY(" + (hidden ? 0 : rotateY) + "deg) scale(" + (hidden ? 0.4 : Math.max(scale, 0.5)) + ")";
+      const finalScale = hidden ? 0.4 : Math.max(scale, 0.5);
+      item.style.transform = "translate(-50%, -50%) translateX(" + (hidden ? 0 : translateX) + "px) translateZ(" + (hidden ? -500 : translateZ) + "px) rotateY(" + (hidden ? 0 : rotateY) + "deg) scaleX(" + finalScale + ") scaleY(" + finalScale + ")";
       item.style.opacity = hidden ? "0" : "1";
       item.style.zIndex = hidden ? 0 : zIndex;
       item.classList.toggle("active", offset === 0);
@@ -487,7 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rect = img.getBoundingClientRect();
 
     var back = document.createElement("img");
-    back.src = img.src;
+    back.src = "images/popups/projects/State=closed, Color=" + color + ".svg";
     back.className = "vinyl-flap-back";
     back.style.left = rect.left + "px";
     back.style.top = rect.top + "px";
