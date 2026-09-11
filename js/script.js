@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
     positionObject(laptop, 551, 524, 385);
     if (laptopTooltip) {
       const rect = laptop.getBoundingClientRect();
-      laptopTooltip.style.left = rect.left + "px";
-      laptopTooltip.style.top = rect.top + "px";
+      laptopTooltip.style.left = (rect.left + 170) + "px";
+      laptopTooltip.style.top = (rect.top + 129) + "px";
     }
   }
   function positionVinylPlayer() { positionObject(vinylPlayerWrap, 1025, 135, 209); }
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function restartArrowOnHover(triggerEl, tooltipEl) {
     if (!triggerEl || !tooltipEl) return;
     triggerEl.addEventListener("mouseenter", () => {
-      tooltipEl.querySelectorAll(".me-tooltip-arrow svg").forEach((arrowSvg) => {
+      tooltipEl.querySelectorAll(".tooltip-arrow svg").forEach((arrowSvg) => {
         const clone = arrowSvg.cloneNode(true);
         arrowSvg.replaceWith(clone);
       });

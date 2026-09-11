@@ -175,11 +175,11 @@ body.night-mode .scene-generative:hover {
   pointer-events: none;
 }
 
-.me-tooltip {
+.tooltip {
   position: fixed;
   left: 0;
   top: 0;
-  transform: translate(-100%, calc(-100% - 8px));
+  transform: translate(-100%, calc(-100% + 29px));
   rotate: 10deg;
   display: flex;
   flex-direction: column;
@@ -194,13 +194,14 @@ body.night-mode .scene-generative:hover {
   transition: opacity 0.25s ease;
 }
 
-#me-wrap:hover ~ .me-tooltip {
+#me-wrap:hover ~ #me-tooltip {
   opacity: 1;
 }
 
 .laptop-tooltip {
   transform: translate(-70%, calc(-100% - 8px));
-  rotate: 0deg;
+  rotate: -17deg;
+  white-space: nowrap;
 }
 
 #laptop:hover ~ .laptop-tooltip {
@@ -233,6 +234,25 @@ body.night-mode .scene-generative:hover {
   rotate: 0deg;
 }
 
+.playpause-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tooltip-icon {
+  display: block;
+  width: 18px;
+  height: auto;
+  color: var(--color-lavender-light);
+}
+
+.tooltip-icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .vinylplayer-tooltip2 {
   position: absolute;
   left: 50%;
@@ -249,7 +269,7 @@ body.night-mode .scene-generative:hover {
   opacity: 1;
 }
 
-.me-tooltip-arrow {
+.tooltip-arrow {
   display: block;
   width: clamp(100px, 3vw, 500px);
   height: auto;
@@ -258,27 +278,28 @@ body.night-mode .scene-generative:hover {
 }
 
 /* Cada tooltip pode ter a sua própria rotação/tamanho de seta */
-.laptop-tooltip .me-tooltip-arrow {
+.laptop-tooltip .tooltip-arrow {
+  rotate: 75deg;
+  transform: scaleX(-1);
+}
+
+.boxvinyl-tooltip .tooltip-arrow {
   rotate: 0deg;
 }
 
-.boxvinyl-tooltip .me-tooltip-arrow {
+.phone-tooltip .tooltip-arrow {
   rotate: 0deg;
 }
 
-.phone-tooltip .me-tooltip-arrow {
+.vinylplayer-tooltip .tooltip-arrow {
   rotate: 0deg;
 }
 
-.vinylplayer-tooltip .me-tooltip-arrow {
+.vinylplayer-tooltip2 .tooltip-arrow {
   rotate: 0deg;
 }
 
-.vinylplayer-tooltip2 .me-tooltip-arrow {
-  rotate: 0deg;
-}
-
-.me-tooltip-arrow svg {
+.tooltip-arrow svg {
   display: block;
   width: 100%;
   height: auto;
