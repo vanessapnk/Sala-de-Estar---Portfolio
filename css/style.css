@@ -1,16 +1,16 @@
 :root {
   /* Primárias */
-  --color-navy:           #0F203E;
-  --color-purple:         #6268CD;
-  --color-lavender:       #927AD7;
+  --color-navy: #0F203E;
+  --color-purple: #6268CD;
+  --color-lavender: #927AD7;
   --color-lavender-light: #EDE2F0;
 
   /* Secundárias */
-  --color-green:          #4E7A35;
-  --color-lime:           #B0B530;
-  --color-yellow:         #FBD987;
-  --color-red:            #E8403A;
-  --color-pink:           #CC5E96;
+  --color-green: #4E7A35;
+  --color-lime: #B0B530;
+  --color-yellow: #FBD987;
+  --color-red: #E8403A;
+  --color-pink: #CC5E96;
 }
 
 * {
@@ -144,29 +144,6 @@ body.night-mode .scene-generative:hover {
   height: auto;
 }
 
-
-.vinyl-tooltip {
-  position: absolute;
-  bottom: 105%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-navy);
-  color: var(--color-lavender-light);
-  font-family: 'Lato', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 6px 12px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-
-.vinyl-player-wrap.show-tooltip:hover .vinyl-tooltip {
-  opacity: 1;
-}
-
 /* "me" hover tooltip */
 #me-wrap img {
   display: block;
@@ -175,12 +152,11 @@ body.night-mode .scene-generative:hover {
   pointer-events: none;
 }
 
+/* ── Base partilhada por todos os tooltips ── */
 .tooltip {
   position: fixed;
   left: 0;
   top: 0;
-  transform: translate(-100%, calc(-100% + 29px));
-  rotate: 10deg;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -194,50 +170,18 @@ body.night-mode .scene-generative:hover {
   transition: opacity 0.25s ease;
 }
 
-#me-wrap:hover ~ #me-tooltip {
-  opacity: 1;
+.tooltip-arrow {
+  display: block;
+  width: calc(90px * var(--scene-scale, 1));
+  height: auto;
+  color: var(--color-lavender-light);
+  rotate: -95deg;
 }
 
-.laptop-tooltip {
-  transform: translate(-70%, calc(-100% - 8px));
-  rotate: -17deg;
-  white-space: nowrap;
-}
-
-#laptop:hover ~ .laptop-tooltip {
-  opacity: 1;
-}
-
-.boxvinyl-tooltip {
-  transform: translate(-50%, calc(-100% - 8px));
-  rotate: 0deg;
-}
-
-#box-vinyl:hover ~ .boxvinyl-tooltip {
-  opacity: 1;
-}
-
-.phone-tooltip {
-  transform: translate(-50%, calc(-100% - 8px));
-  rotate: 0deg;
-}
-
-#phone:hover ~ .phone-tooltip {
-  opacity: 1;
-}
-
-.vinylplayer-tooltip {
-  position: absolute;
-  left: 50%;
-  top: 105%;
-  transform: translate(-50%, 0);
-  rotate: 0deg;
-}
-
-.playpause-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.tooltip-arrow svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .tooltip-icon {
@@ -253,56 +197,102 @@ body.night-mode .scene-generative:hover {
   height: auto;
 }
 
-.vinylplayer-tooltip2 {
-  position: absolute;
-  left: 50%;
-  bottom: 105%;
-  transform: translate(-50%, 0);
-  rotate: 0deg;
-  white-space: normal;
-  max-width: 160px;
-  text-align: center;
+/* Cor por tema: night = lavender-light (base acima), day = purple */
+body.day-mode .tooltip,
+body.day-mode .tooltip-arrow,
+body.day-mode .tooltip-icon {
+  color: var(--color-navy);
 }
 
-.vinyl-player-wrap:hover .vinylplayer-tooltip,
-.vinyl-player-wrap:hover .vinylplayer-tooltip2 {
+/* ── "me" (Sobre mim) ── */
+#me-tooltip {
+  transform: translate(-100%, calc(-100% + 35px * var(--scene-scale, 1)));
+  rotate: 10deg;
+}
+
+#me-wrap:hover~#me-tooltip {
   opacity: 1;
 }
 
-.tooltip-arrow {
-  display: block;
-  width: clamp(100px, 3vw, 500px);
-  height: auto;
-  color: var(--color-lavender-light);
-  rotate: -95deg;
+/* ── Laptop (Ferramentas & CV) ── */
+.laptop-tooltip {
+  transform: translate(-70%, calc(-100% - 30px * var(--scene-scale, 1)));
+  rotate: -19deg;
 }
 
-/* Cada tooltip pode ter a sua própria rotação/tamanho de seta */
+#laptop:hover~.laptop-tooltip {
+  opacity: 1;
+}
+
 .laptop-tooltip .tooltip-arrow {
   rotate: 75deg;
   transform: scaleX(-1);
 }
 
-.boxvinyl-tooltip .tooltip-arrow {
+/* ── Caixa de vinis (Projetos) ── */
+.boxvinyl-tooltip {
+  transform: translate(-160%, calc(-100% + 18px * var(--scene-scale, 1)));
   rotate: 0deg;
+}
+
+#box-vinyl:hover~.boxvinyl-tooltip {
+  opacity: 1;
+}
+
+.boxvinyl-tooltip .tooltip-arrow {
+  rotate: 75deg;
+  transform: scaleX(-1);
+}
+
+/* ── Telefone (Contactos) ── */
+.phone-tooltip {
+  transform: translate(-125%, calc(-100% - 8px * var(--scene-scale, 1)));
+  rotate: -6deg;
+}
+
+#phone:hover~.phone-tooltip {
+  opacity: 1;
 }
 
 .phone-tooltip .tooltip-arrow {
-  rotate: 0deg;
+  rotate: 55deg;
+  transform: scaleX(-1);
+}
+
+/* ── Vinyl player: Play/Pause ── */
+.playpause-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vinylplayer-tooltip {
+  transform: translate(-65%, calc(-100% + 100px * var(--scene-scale, 1)));
 }
 
 .vinylplayer-tooltip .tooltip-arrow {
-  rotate: 0deg;
+  rotate: 60deg;
+  transform: scaleX(-1);
+}
+
+/* ── Vinyl player: Duplo clique para abrir ── */
+.vinylplayer-tooltip2 {
+  transform: translate(-155%, calc(-100% + 65px * var(--scene-scale, 1)));
+  rotate: -18deg;
+  white-space: normal;
+  max-width: 100px;
+  text-align: center;
+  font-size: clamp(20px, 2.2vw, 18px);
 }
 
 .vinylplayer-tooltip2 .tooltip-arrow {
-  rotate: 0deg;
+  /* rotate: 0deg; */
+  display: none;
 }
 
-.tooltip-arrow svg {
-  display: block;
-  width: 100%;
-  height: auto;
+.vinyl-player-wrap:hover .vinylplayer-tooltip,
+.vinyl-player-wrap:hover .vinylplayer-tooltip2 {
+  opacity: 1;
 }
 
 /* Laptop escala mais no hover */
@@ -316,13 +306,16 @@ body.night-mode #laptop:hover {
 
 /* LP flutuante */
 @keyframes lp-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateZ(0) translateY(0px);
-    filter: drop-shadow(0px 4px 3px rgba(0,0,0,0.35));
+    filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.35));
   }
+
   50% {
     transform: translateZ(0) translateY(-4px);
-    filter: drop-shadow(0px 8px 8px rgba(0,0,0,0.7));
+    filter: drop-shadow(0px 8px 8px rgba(0, 0, 0, 0.7));
   }
 }
 
@@ -336,11 +329,11 @@ body.night-mode #laptop:hover {
 }
 
 /* Telefone a vibrar */
-@keyframes phone-ring {
+/* @keyframes phone-ring {
   0%, 100% { transform: translateZ(0) rotate(0deg); }
   25%       { transform: translateZ(0) rotate(-4deg); }
   75%       { transform: translateZ(0) rotate(4deg); }
-}
+} */
 
 #phone.ringing {
   animation: phone-ring 0.2s ease-in-out infinite;
@@ -349,13 +342,27 @@ body.night-mode #laptop:hover {
 
 /* Glow hint — chama atenção para os elementos interativos */
 @keyframes glow-pulse-day {
-  0%, 100% { filter: drop-shadow(0 0 0px transparent); }
-  50%       { filter: drop-shadow(0 0 7px rgba(255, 220, 150, 0.55)) drop-shadow(0 0 16px rgba(255, 180, 80, 0.3)); }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px transparent);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 7px rgba(255, 220, 150, 0.55)) drop-shadow(0 0 16px rgba(255, 180, 80, 0.3));
+  }
 }
 
 @keyframes glow-pulse-night {
-  0%, 100% { filter: drop-shadow(0 0 0px transparent); }
-  50%       { filter: drop-shadow(0 0 7px rgba(180, 200, 255, 0.55)) drop-shadow(0 0 16px rgba(150, 170, 255, 0.3)); }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px transparent);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 7px rgba(180, 200, 255, 0.55)) drop-shadow(0 0 16px rgba(150, 170, 255, 0.3));
+  }
 }
 
 body.day-mode .glow-hint {
@@ -371,7 +378,7 @@ body.night-mode .glow-hint {
   bottom: 8px;
   right: 12px;
   font-family: 'Lato', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: rgba(237, 226, 240, 0.6);
   z-index: 5;

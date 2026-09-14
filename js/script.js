@@ -76,8 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
     positionObject(laptop, 551, 524, 385);
     if (laptopTooltip) {
       const rect = laptop.getBoundingClientRect();
-      laptopTooltip.style.left = (rect.left + 170) + "px";
-      laptopTooltip.style.top = (rect.top + 129) + "px";
+      const { scale } = getCoverTransform();
+      laptopTooltip.style.left = (rect.left + 170 * scale) + "px";
+      laptopTooltip.style.top = (rect.top + 129 * scale) + "px";
     }
   }
   function positionVinylPlayer() { positionObject(vinylPlayerWrap, 1025, 135, 209); }
@@ -102,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function positionLp() { positionObject(lp, 1056, 245, 108); }
 
   function positionAll() {
+    const { scale } = getCoverTransform();
+    document.documentElement.style.setProperty("--scene-scale", scale);
     positionToggle();
     positionPhone();
     positionLaptop();
@@ -358,7 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Single click = play, double click = open popup
   let vinylClickTimer = null;
-  let vinylFirstClicked = false;
   vinylPlayerWrap.addEventListener("click", (e) => {
     if (vinylClickTimer) {
       clearTimeout(vinylClickTimer);
@@ -368,10 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
       vinylClickTimer = setTimeout(() => {
         vinylClickTimer = null;
         toggleVinylPlay();
-        if (!vinylFirstClicked) {
-          vinylFirstClicked = true;
-          vinylPlayerWrap.classList.add("show-tooltip");
-        }
       }, 300);
     }
   });
