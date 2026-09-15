@@ -207,29 +207,49 @@
     </div>
   </div>
 
-  <!-- Pop-up About Me -->
+  <!-- Pop-up About Me (fechado) -->
   <div id="popup-about" class="popup-overlay">
     <div class="popup-box about-popup">
       <button class="popup-close-btn" onclick="closePopup('popup-about')" aria-label="Fechar">
         <img src="images/icons/close.svg" alt="Fechar">
       </button>
-      <img class="about-bg" src="images/popups/about me.svg" alt="About Me">
-      <div class="about-photo-wrap">
-        <img class="about-photo" src="images/popups/myPhoto.png" alt="Vanessa Silva">
+
+      <img class="about-bg" id="about-bg-closed" src="images/popups/about me_closed.svg" alt="Livro fechado, clica para abrir">
+      <div class="about-click-zone" id="about-click-zone" aria-label="Abrir livro"></div>
+    </div>
+  </div>
+
+  <!-- Pop-up About Me (a abrir / aberto) -->
+  <div id="popup-about-open" class="popup-overlay">
+    <div class="popup-box about-popup">
+      <button class="popup-close-btn" onclick="reverseBookClose()" aria-label="Fechar">
+        <img src="images/icons/close.svg" alt="Fechar">
+      </button>
+
+      <img class="about-bg" id="about-bg-opening" src="images/popups/about me_opening.svg" alt="Livro a abrir">
+      <img class="about-bg" id="about-bg-open" src="images/popups/about me.svg" alt="Livro aberto" hidden>
+      <div class="about-open-click-zone" id="about-open-click-zone" aria-label="Livro aberto"></div>
+
+      <!--
+      <div class="about-content" id="about-content">
+        <div class="about-photo-wrap">
+          <img class="about-photo" src="images/popups/myPhoto.png" alt="Vanessa Silva">
+        </div>
+        <span class="about-label about-label-uiux">UI/UX Designer</span>
+        <span class="about-label about-label-creativity">Creativity</span>
+        <span class="about-label about-label-problem">Problem solving</span>
+        <span class="about-label about-label-critical">Critical<br>thinking</span>
+        <span class="about-label about-label-frontend">Front-end<br>Developer</span>
+        <div class="about-text">
+          <p>Entra, fica à vontade!<br>
+          Sou a Vanessa, alguém que acredita que as melhores experiências digitais se sentem como um espaço onde queremos ficar.</p>
+          <p>Comecei por Engenharia Civil, mudei de rumo, passei pelo mundo do código num bootcamp de Fullstack, e fui percebendo que o que me move mesmo é a intersecção entre o analítico e o humano, criar coisas bonitas, apelativas, que funcionam, que fazem sentido, e que as pessoas conseguem usar sem esforço.</p>
+          <p>Hoje estou a aprofundar o meu caminho em UI/UX Design: interaction design, usabilidade e prototipagem. Trago comigo anos de experiência em atendimento ao cliente, logística e operações, o que me deu uma visão muito prática de como as pessoas realmente se comportam, e do que precisam.</p>
+          <p>Esta sala é minha. Os vinis são a minha playlist constante e a minha inspiração, o laptop a minha ferramenta de trabalho, e a Kira a minha fiel companhia... Explora à vontade e descobre o que cada canto tem para te contar.<br>
+          E se quiseres conversar... atende o telefone!</p>
+        </div>
       </div>
-      <span class="about-label about-label-uiux">UI/UX Designer</span>
-      <span class="about-label about-label-creativity">Creativity</span>
-      <span class="about-label about-label-problem">Problem solving</span>
-      <span class="about-label about-label-critical">Critical<br>thinking</span>
-      <span class="about-label about-label-frontend">Front-end<br>Developer</span>
-      <div class="about-text">
-        <p>Entra, fica à vontade!<br>
-        Sou a Vanessa, alguém que acredita que as melhores experiências digitais se sentem como um espaço onde queremos ficar.</p>
-        <p>Comecei por Engenharia Civil, mudei de rumo, passei pelo mundo do código num bootcamp de Fullstack, e fui percebendo que o que me move mesmo é a intersecção entre o analítico e o humano, criar coisas bonitas, apelativas, que funcionam, que fazem sentido, e que as pessoas conseguem usar sem esforço.</p>
-        <p>Hoje estou a aprofundar o meu caminho em UI/UX Design: interaction design, usabilidade e prototipagem. Trago comigo anos de experiência em atendimento ao cliente, logística e operações, o que me deu uma visão muito prática de como as pessoas realmente se comportam, e do que precisam.</p>
-        <p>Esta sala é minha. Os vinis são a minha playlist constante e a minha inspiração, o laptop a minha ferramenta de trabalho, e a Kira a minha fiel companhia... Explora à vontade e descobre o que cada canto tem para te contar.<br>
-        E se quiseres conversar... atende o telefone!</p>
-      </div>
+      -->
     </div>
   </div>
 

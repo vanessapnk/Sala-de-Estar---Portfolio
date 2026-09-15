@@ -35,9 +35,57 @@
   animation: popup-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+/* Continuação da animação do livro — sem "saltar", sem fade do overlay */
+#popup-about-open.active {
+  animation: none;
+  opacity: 1;
+}
+
+#popup-about-open.active .popup-box {
+  animation: none;
+}
+
+#popup-about.no-bounce.active {
+  animation: none;
+  opacity: 1;
+}
+
+#popup-about.no-bounce.active .popup-box {
+  animation: none;
+}
+
 /* ── Caixa base ── */
 .popup-box {
   position: relative;
+}
+
+/* ── Botão fechar genérico ── */
+.popup-close-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: clamp(14px, 2vw, 18px);
+  padding: 0;
+  z-index: 10;
+  transition: opacity 0.2s;
+}
+
+/* Área de clique maior (~44px, acessibilidade), sem alterar o tamanho visual do ícone */
+.popup-close-btn::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+}
+
+.popup-close-btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.popup-close-btn:hover img {
+  content: url('../images/icons/close-hove.svg');
 }
 
 /* ── Título partilhado ── */
@@ -160,14 +208,54 @@
 /* ── About ── */
 .about-popup {
   position: relative;
-  width: min(85vw, 130vh);
+  width: 100vw;
+  height: 100vh;
   container-type: inline-size;
 }
 
 .about-bg {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-bg[hidden] {
+  display: none;
+}
+
+#about-bg-closed {
+  pointer-events: none;
+  transition: transform 0.35s ease;
+}
+
+/* Zona clicável exata do livro (posição do Figma, não a imagem toda) */
+.about-click-zone {
+  position: absolute;
+  left: 32.68%;
+  top: 12.54%;
+  width: 34.64%;
+  height: 76.85%;
+  cursor: pointer;
+}
+
+#about-bg-opening,
+#about-bg-open {
+  pointer-events: none;
+}
+
+.about-open-click-zone {
+  position: absolute;
+  left: 18.82%;
+  top: 13.29%;
+  width: 62.40%;
+  height: 81.30%;
+}
+
+#about-bg-closed.slide-out {
+  transform: translateX(50px);
 }
 
 .about-photo-wrap {
@@ -250,33 +338,20 @@
   margin: 0 0 max(3px, 0.7cqw);
 }
 
-.about-popup .popup-close-btn {
+#popup-about .popup-close-btn {
   top: 6%;
   right: 5%;
 }
 
-/* ── Botão fechar genérico ── */
-.popup-close-btn {
-  position: absolute;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: clamp(14px, 2vw, 18px);
-  padding: 0;
-  z-index: 10;
-  transition: opacity 0.2s;
+/* Ícone lavender-light no livro fechado (mesmo truque do carrossel em night mode: troca o ficheiro inteiro, já que <img src> não aceita currentColor) */
+#popup-about .popup-close-btn img {
+  content: url('../images/icons/close-darkBackground.svg');
 }
 
-.popup-close-btn img {
-  display: block;
-  width: 100%;
-  height: auto;
+#popup-about-open .popup-close-btn {
+  top: 6%;
+  right: 5%;
 }
-
-.popup-close-btn:hover img {
-  content: url('../images/icons/close-hove.svg');
-}
-
 
 /* ══════════════════════════════
    Agenda (contacts)
@@ -474,6 +549,7 @@
   top: 7.5%;
   width: 56.67%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .vinyl-disc {
@@ -503,10 +579,6 @@
   z-index: 2;
   pointer-events: none;
   clip-path: polygon(58% 0%, 82% 0%, 82% 70%, 58% 70%);
-}
-
-.vinyl-disc-wrap {
-  z-index: 1;
 }
 
 /* Track name */
@@ -628,7 +700,6 @@
   transition: bottom 0.05s;
   box-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
-
 
 /* ══════════════════════════════
    Projects Carousel
@@ -971,7 +1042,6 @@ body:not(.day-mode) .projects-close-carousel:hover img {
 /* Desktop grande (>= 1440px) */
 @media (min-width: 1440px) {
   .skills-popup { width: 65vw; }
-  .about-popup { width: min(80vw, 1100px, 130vh); }
   .agenda-popup { width: min(700px, 80vw, 89.6vh); }
   .vinyl-popup { width: min(900px, 85vw, 130vh); }
   .carousel-item { width: clamp(280px, 35vw, 600px); }
@@ -980,7 +1050,6 @@ body:not(.day-mode) .projects-close-carousel:hover img {
 /* Desktop (>= 1024px) */
 @media (min-width: 1024px) and (max-width: 1439px) {
   .skills-popup { width: 72vw; }
-  .about-popup { width: min(88vw, 130vh); }
   .agenda-popup { width: min(700px, 86vw, 89.6vh); }
   .vinyl-popup { width: min(900px, 90vw, 130vh); }
   .carousel-item { width: clamp(200px, 31.3vw, 450px); }
@@ -989,7 +1058,6 @@ body:not(.day-mode) .projects-close-carousel:hover img {
 /* Tablet landscape */
 @media (orientation: landscape) and (max-width: 1023px) {
   .skills-popup { width: 85vw; }
-  .about-popup { width: min(90vw, 150vh); }
   .agenda-popup { width: min(90vw, 95vh); max-height: 94vh; }
   .vinyl-popup { width: min(130vh, 90vw); }
   .carousel-item { width: clamp(160px, 28vw, 330px); }
@@ -998,7 +1066,6 @@ body:not(.day-mode) .projects-close-carousel:hover img {
 /* Mobile landscape */
 @media (orientation: landscape) and (max-width: 767px) {
   .skills-popup { width: 92vw; }
-  .about-popup { width: min(85vw, 120vh); }
   .agenda-popup { width: min(97vh, 95vw); max-height: 96vh; }
   .agenda-field textarea { height: 5vh; }
   .vinyl-popup { width: min(130vh, 95vw); }

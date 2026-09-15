@@ -86,7 +86,6 @@ body.night-mode {
   transition: opacity 0.4s ease;
 }
 
-
 /* Hover — popup: escala + glow */
 body.day-mode .scene-popup:hover {
   transform: translateZ(0) scale(1.02);
@@ -329,11 +328,11 @@ body.night-mode #laptop:hover {
 }
 
 /* Telefone a vibrar */
-/* @keyframes phone-ring {
+@keyframes phone-ring {
   0%, 100% { transform: translateZ(0) rotate(0deg); }
   25%       { transform: translateZ(0) rotate(-4deg); }
   75%       { transform: translateZ(0) rotate(4deg); }
-} */
+}
 
 #phone.ringing {
   animation: phone-ring 0.2s ease-in-out infinite;
