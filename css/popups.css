@@ -219,7 +219,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .about-bg[hidden] {
@@ -227,31 +227,14 @@
 }
 
 #about-bg-closed {
-  pointer-events: none;
-  transition: transform 0.35s ease;
-}
-
-/* Zona clicável exata do livro (posição do Figma, não a imagem toda) */
-.about-click-zone {
-  position: absolute;
-  left: 32.68%;
-  top: 12.54%;
-  width: 34.64%;
-  height: 76.85%;
+  pointer-events: auto;
   cursor: pointer;
+  transition: transform 0.35s ease;
 }
 
 #about-bg-opening,
 #about-bg-open {
   pointer-events: none;
-}
-
-.about-open-click-zone {
-  position: absolute;
-  left: 18.82%;
-  top: 13.29%;
-  width: 62.40%;
-  height: 81.30%;
 }
 
 #about-bg-closed.slide-out {
@@ -339,8 +322,8 @@
 }
 
 #popup-about .popup-close-btn {
-  top: 6%;
-  right: 5%;
+  top: 3%;
+  right: 8%;
 }
 
 /* Ícone lavender-light no livro fechado (mesmo truque do carrossel em night mode: troca o ficheiro inteiro, já que <img src> não aceita currentColor) */
@@ -349,8 +332,8 @@
 }
 
 #popup-about-open .popup-close-btn {
-  top: 6%;
-  right: 5%;
+  top: 3%;
+  right: 3%;
 }
 
 /* ══════════════════════════════

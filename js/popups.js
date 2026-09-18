@@ -65,10 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const aboutBgClosed = document.getElementById("about-bg-closed");
   const aboutBgOpening = document.getElementById("about-bg-opening");
   const aboutBgOpen = document.getElementById("about-bg-open");
-  const aboutClickZone = document.getElementById("about-click-zone");
 
-  if (aboutClickZone) {
-    aboutClickZone.addEventListener("click", (e) => {
+  if (aboutBgClosed) {
+    aboutBgClosed.addEventListener("click", (e) => {
       e.stopPropagation();
       aboutBgClosed.classList.add("slide-out");
       setTimeout(() => {
@@ -83,16 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 350);
     });
 
-    // Clicar fora da zona do livro (mas dentro do popup) fecha
+    // Clicar fora do livro fechado fecha
     document.querySelector("#popup-about .about-popup").addEventListener("click", () => {
       closePopup("popup-about");
     });
   }
 
-  // Livro aberto: clicar fora da zona do livro (mas dentro do popup) fecha
-  const aboutOpenClickZone = document.getElementById("about-open-click-zone");
-  if (aboutOpenClickZone) {
-    aboutOpenClickZone.addEventListener("click", (e) => e.stopPropagation());
+  // Livro aberto: clicar fora fecha
+  if (aboutBgOpen) {
+    aboutBgOpen.addEventListener("click", (e) => e.stopPropagation());
     document.querySelector("#popup-about-open .about-popup").addEventListener("click", () => {
       reverseBookClose();
     });
